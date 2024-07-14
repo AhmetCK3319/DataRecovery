@@ -1,0 +1,51 @@
+{% load static %}
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+        <!-- <img src="img/logo.png" alt=""> -->
+        <h1 class="sitename">Kayseri Veri Merkezi</h1> <span>&</span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Anasayfa</a></li>
+          <li class="dropdown"><a href="#"><span>Hizmetlerimiz</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="{% url 'ssd_services' %}">SSD Veri Kurtarma </a></li>
+              <li><a href="{% url 'hdd_services' %}">HDD Veri Kurtarma</a></li>
+                <li><a href="{% url 'pc_services' %}">Bilgisayar Tamir ve Bakımı</a></li>
+              <li><a href="{% url 'phone_technical_services' %}">Profesyonel Cep Telefonu Teknik Servisi</a></li>
+              <li><a href="{% url 'phone_password_services' %}">Profesyonel Cep Telefonu Şifre Kırma</a></li>
+              <li><a href="{% url 'phone_data_services' %}">Profesyonel Cep Telefonu Veri Kurtarma</a></li>
+              <li><a href="{% url 'usb_services' %}">USB Bellek Veri Kurtarma</a></li>
+              <li class="dropdown"><a href="#"><span>Yazılım Hizmetleri</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="{% url 'portfolio_services' %}">Portfolio Site Projesi</a></li>
+                  <li><a href="{% url 'commercial_services' %}">Ticari Web Site Projeleri </a></li>
+                  <li><a href="{% url 'backend_services' %}">Django Back End Yazılım Destekleri</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="{% url 'single_post' %}" class="{% if request.path == '/single_post/' %}active{% endif %}" >Blog</a></li>
+          <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">Hakkımızda</a></li>
+          <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Bize Ulaşın</a></li>
+          <li class="dropdown"><a href="{% url 'register' %} " class="{% if request.path == '/register/' %}active{% endif %}"><span>üye ol</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+               {% if not user.is_authenticated %}
+                    <li><a style="color: #0f5132" href="{% url 'login' %}">Giriş</a></li>
+                    <li><a style="color: #0f5132" href="{% url 'register' %}">Üyelik Oluştur</a></li>
+               {% else %}
+                    {% if user.is_admin %}
+                        <li><a style="color: #0f5132" href="{% url 'new_post' %}">Post Zamanı</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}">Çıkış</a></li>
+                {% endif %}
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>

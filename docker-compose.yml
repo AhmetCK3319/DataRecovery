@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:latest
+    env_file:
+      - veri/docker.env
+    ports:
+      - "5434:5432"
+    volumes:
+      - "postgresql-data:/var/lib/postgresql/data"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    env_file:
+      - veri/docker.env
+    volumes:
+      - .:/srv/app
+    ports:
+      - "0.0.0.0:8000:8000"
+    command: gunicorn veri.wsgi:application --bind 0.0.0.0:8000
+
+volumes:
+  postgresql-data:
+  static-data:

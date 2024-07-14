@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login Page {% endblock %}
+
+
+
+{% block content %}
+    <body class="blog-page">
+    <main class="main">
+    <!-- Page Title -->
+    <div class="page-title" style="background-image: url({% get_media_prefix %}img/page-title-bg.jpg);">
+        <div class="container position-relative">
+            <h1>Login Page</h1>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li class="current">Login</li>
+                </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+    <!-- Blog Posts Section -->
+    <section id="blog-posts" class="blog-posts section">
+        <div class="container">
+            <div class="row gy-4">
+               <center>
+                   <div class="col-lg-6">
+                    <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" name="email">
+                    </div>
+                    <br> <!-- form-group// -->
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                    </div>
+                    <br> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block btn-lg"> Login</button>
+                    </div> <!-- form-group// -->
+                </form>
+               </div>
+               </center>
+            </div>
+        </div>
+    </section><!-- /Blog Posts Section -->
+
+{% endblock %}

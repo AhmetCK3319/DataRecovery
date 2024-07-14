@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %} Commercial Page {% endblock %}
+
+{% block content  %}
+<body class="blog-page">
+  <main class="main">
+    <!-- Page Title -->
+    <div class="page-title" style="background-image: url({% get_media_prefix %}img/page-title-bg.jpg);">
+     
+    </div><!-- End Page Title -->
+    <!-- Blog Posts Section -->
+    <section id="blog-posts" class="blog-posts section">
+      <div class="container">
+        <div class="row gy-4">
+          {% for service in services %}
+          <div class="col-lg-4 p-2">
+            <article class="position-relative h-100">
+              <div class="post-img position-relative overflow-hidden">
+                <img src="{{ service.image|thumbnail_url:'blog' }}" class="img-fluid" alt="">
+              </div>
+              <div class="post-content d-flex flex-column">
+                <h3 class="post-title">{{ service.title }}</h3>
+              </div>    
+            </article>
+          </div><!-- End post list item -->
+          <div class="col-lg-8">
+          <p style="text-align: justify; text-indent: 50px">{{ service.description|safe }}</p>
+          </div>    
+          {% endfor %}
+        </div>
+      </div>
+    </section><!-- /Services Posts Section -->
+  </main>
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Preloader -->
+{% endblock %}
+
+
+
+ 

@@ -387,7 +387,7 @@ h6 {
   --default-color: var(--contrast-color);
   color: var(--default-color);
   background-color: var(--background-color);
-  background: url("../img/footer-bg.jpg") top center no-repeat;
+  background: url("../../media/img/footer-bg.jpg") top center no-repeat;
   background-size: cover;
   font-size: 14px;
   padding-bottom: 50px;
@@ -807,7 +807,7 @@ section,
 
 .hero .carousel-item::before {
   content: "";
-  background-color: color-mix(in srgb, var(--background-color), transparent 30%);
+  background-color: color-mix(in srgb, var(--background-color), transparent 42%);
   position: absolute;
   inset: 0;
   z-index: 2;

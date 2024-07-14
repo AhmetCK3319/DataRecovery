@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+env = environ.Env(DEBUG=(bool, True))
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-o3e+6y4yr033uc0^8($=fk#q6o_f-h0ab(poi0n!00g5pg=oo5"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=list)
+CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS', cast=list)
 
 
 # Application definition
@@ -38,6 +43,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'core.apps.CoreConfig',
+    'contact',
+    'tinymce',
+    'accounts',
+    'service',
+    'easy_thumbnails',
+
 ]
 
 MIDDLEWARE = [
@@ -64,6 +75,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.social_link",
             ],
         },
     },
@@ -71,15 +83,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "veri.wsgi.application"
 
+AUTH_USER_MODEL = "accounts.Account"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": env.db(),
 }
 
 
@@ -131,3 +141,22 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+THUMBNAIL_ALIASES = {
+    "": {
+        "thumbnail": {"size": (900, 571), "crop": True},
+        "slider": {"size": (647, 400), "crop": True},
+        "avatar": {"size": (40, 40), "crop": True},
+        "blog": {"size": (516, 387), "crop": True},
+    },
+}
+
+
+#SMTP AYARLARI
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "alican331957@gmail.com"
+EMAIL_HOST_PASSWORD = "oqtm qjcn ixqq skyd"
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

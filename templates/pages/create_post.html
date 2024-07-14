@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 p-5">
+<center>
+    <h1>
+    Post Create
+    </h1>
+</center>
+<div class="row card shadow p-5 mb-5 bg-body rounded">
+    <div class="col-sm-8 offset-sm-2 p-3">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form}}
+            {{ form.media }}
+
+            <br><button type="submit" class="btn btn-success btn-block"> Gönder </button>
+        </form><br>
+    </div>
+</div>
+</div>
+{% endblock %}

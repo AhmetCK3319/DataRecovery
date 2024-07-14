@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %} Django Backend Page {% endblock %}
+
+{% block content %}
+    <body class="blog-page">
+    <main class="main">
+        <!-- Page Title -->
+        <div class="page-title" style="background-image: url({% get_media_prefix %}img/page-title-bg.jpg);">
+            <div class="container position-relative">
+            </div>
+        </div><!-- End Page Title -->
+        <!-- Blog Posts Section -->
+        <section id="blog-posts" class="blog-posts section">
+            <div class="container">
+                <div class="row gy-4">
+                    {% for service in services %}
+                        <div class="col-lg-4 p-2">
+                            <article class="position-relative h-100">
+                                <div class="post-img position-relative overflow-hidden">
+                                    <img src="{{ service.image|thumbnail_url:'blog' }}" class="img-fluid" alt="">
+                                </div>
+                                <div class="post-content d-flex flex-column">
+                                    <h3 class="post-title">{{ service.title }}</h3>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+                        <div class="col-lg-8">
+                            <p style="text-align: justify; text-indent: 50px">{{ service.description|safe }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section><!-- /Blog Posts Section -->
+        <!-- Blog Pagination Section -->
+        <section id="blog-pagination" class="blog-pagination section">
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <ul>
+                        <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#" class="active">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li>...</li>
+                        <li><a href="#">10</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section><!-- /Blog Pagination Section -->
+    </main>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <!-- Preloader -->
+{% endblock %}
+
+
+
+ 
